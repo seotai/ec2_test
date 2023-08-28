@@ -2,11 +2,9 @@ FROM node:18.16.1 as builder
 
 WORKDIR /var/jenkins_home/workspace/ec2_test/deploy_test
 
-COPY package*.json ./
+COPY . .
 
 RUN yarn install
-
-COPY . .
 
 RUN yarn build
 
