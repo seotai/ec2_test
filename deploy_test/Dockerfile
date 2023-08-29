@@ -1,11 +1,15 @@
 FROM node:18.17.0 as builder
 
 WORKDIR /var/jenkins_home/workspace/ec2_test/deploy_test
-COPY package*.json ./
-COPY yarn*.lock ./
-RUN npm install
+
+
+COPY yarn.lock ./
+
+RUN yarn 
+
 COPY . .
-RUN npm run build
+
+RUN yarn build
 FROM nginx:stable-alpine as production-stage
 
 COPY --from=builder /var/jenkins_home/workspace/ec2_test/deploy_test/dist /usr/share/nginx/html
