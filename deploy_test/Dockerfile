@@ -2,12 +2,12 @@ FROM node:18.17.0 as builder
 
 WORKDIR /var/jenkins_home/workspace/ec2_test/deploy_test
 
-COPY package*.json ./package.json
-COPY yarn*.lock ./yarn.lock
+COPY package*.json /var/jenkins_home/workspace/ec2_test/deploy_test/package.json
+COPY yarn*.lock /var/jenkins_home/workspace/ec2_test/deploy_test/yarn.lock
 
 RUN yarn install
 
-COPY . .
+COPY . /var/jenkins_home/workspace/ec2_test/deploy_test
 
 RUN yarn build
 FROM nginx:stable-alpine as production-stage
