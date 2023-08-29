@@ -10,6 +10,8 @@ RUN yarn
 
 COPY . /usr/src/app
 
+RUN yarn build
+
 FROM nginx
 
 RUN rm -rf /etc/nginx/conf.d
