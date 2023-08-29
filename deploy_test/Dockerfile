@@ -1,17 +1,19 @@
-FROM node:18.17.0 as builder
-
-WORKDIR /var/jenkins_home/workspace/ec2_test/deploy_test
-
-COPY yarn*.lock package*.json ./
-
-RUN yarn install
-
-COPY . .
-
-RUN yarn build
-FROM nginx:stable-alpine as production-stage
-
-COPY --from=builder /var/jenkins_home/workspace/ec2_test/deploy_test/dist /usr/share/nginx/html
-#COPY --from=build-stage /var/jenkins_home/workspace/deploytest/testproject_react/deploy_conf/nginx.conf /etc/nginx/conf.d/default.conf
+FROM nginx:latest
+ 
+# root 에 app 폴더를 생성
+RUN mkdir /app
+ 
+# work dir 고정
+WORKDIR /app
+ 
+# work dir 에 dist 폴더 생성 /app/dist
+RUN mkdir ./dist
+ 
+# host pc의 현재경로의 dist 폴더를 workdir 의 dist 폴더로 복사
+ADD ./dist ./dist
+ 
+# 80 포트 오픈
 EXPOSE 80
-CMD ["nginx", "-g","daemon off;"]
+ 
+# container 실행 시 자동으로 실행할 command. nginx 시작함
+CMD ["nginx", "-g", "daemon off;"]
