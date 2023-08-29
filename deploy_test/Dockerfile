@@ -5,7 +5,7 @@ WORKDIR /var/jenkins_home/workspace/ec2_test/deploy_test
 
 COPY yarn.lock ./
 
-RUN yarn 
+RUN yarn install
 
 COPY . .
 
