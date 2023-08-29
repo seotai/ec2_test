@@ -4,10 +4,9 @@ RUN mkdir /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app/package.json
-COPY yarn.lock /usr/src/app/yarn.lock
+COPY package*.json /usr/src/app/package.json
 
-RUN yarn install
+RUN yarn
 
 COPY . /usr/src/app
 
