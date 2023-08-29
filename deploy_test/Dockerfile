@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn build
+RUN yarn run build
 FROM nginx:stable-alpine as production-stage
 
 COPY --from=builder /var/jenkins_home/workspace/ec2_test/deploy_test/dist /usr/share/nginx/html
