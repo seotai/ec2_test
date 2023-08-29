@@ -1,6 +1,6 @@
 FROM node:18.17.0 as builder
 
-RUN mkdir /usr/src/app
+RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
@@ -9,7 +9,7 @@ COPY yarn*.lock /yarn.lock
 
 RUN yarn install
 
-COPY . .
+COPY ./ /usr/src/app
 
 RUN yarn build
 
