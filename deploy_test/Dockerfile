@@ -2,7 +2,8 @@ FROM node:18.17.0 as builder
 
 WORKDIR /var/jenkins_home/workspace/ec2_test/deploy_test
 
-COPY yarn*.lock package*.json ./
+COPY package*.json ./package.json
+COPY yarn*.lock ./yarn.lock
 
 RUN yarn install
 
